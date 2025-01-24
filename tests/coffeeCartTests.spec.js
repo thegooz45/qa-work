@@ -27,13 +27,13 @@ const COFFEE_ITEMS = [
 test.describe('Selecting an option', () => {
    test('allow me to add an option to cart', async ({ page }) => {
         // verifying we're on the page first (could put this in the beforeEach)
-        await expect(COFFEE_ITEMS[3].toBeVisible());
+        await expect(COFFEE_ITEMS[3]).toBeVisible();
 
         // add an option to cart
         page.getByText(COFFEE_ITEMS[0]).click();
 
         // verify it has been added to cart via updated price
-        await expect('button:text("Total: $8.00")'.toBeVisible());
+        await expect('button:text("Total: $8.00")').toBeVisible();
     });
 });
 
