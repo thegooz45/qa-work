@@ -15,25 +15,18 @@ test.beforeEach(async ({ page }) => {
     await page.goto('https://coffee-cart.app/');
   });
 
-// listing out the items to be asserted on
-const COFFEE_ITEMS = [
-    'whipped cream',
-    'steamed milk',
-    'milk foam',
-    'Flat White'
-];
 
 // 1st positive test!
 test.describe('Selecting an option', () => {
    test('allow me to add an option to cart', async ({ page }) => {
         // verifying we're on the page first (could put this in the beforeEach)
-        await expect(COFFEE_ITEMS[3]).toBeVisible();
+        await expect(page.getByText('Flat White')).toBeVisible();
 
         // add an option to cart
-        page.getByText(COFFEE_ITEMS[0]).click();
+        await page.getByLabel('Mocha').click();
 
         // verify it has been added to cart via updated price
-        await expect('button:text("Total: $8.00")').toBeVisible();
+        await expect(page.getByText('Total: $8.00')).toBeVisible();
     });
 });
 
