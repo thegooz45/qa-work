@@ -30,4 +30,16 @@ test.describe('Selecting an option', () => {
     });
 });
 
+test.describe('Negative test', () => {
+    test('removing an order', async ({ page }) => {
+        // add an option to cart and verifying it's added to cart
+        await page.getByLabel('Mocha').click();
+        await expect(page.getByText('Total: $8.00')).toBeVisible();
 
+        // removing it via '-' button and verifying the order has been removed
+        await page.getByText('Total: $8.00').hover();
+        await page.getByText('-').click({force: true});
+      
+        await expect(page.getByText('Total: $0.00')).toBeVisible();
+    });
+});
